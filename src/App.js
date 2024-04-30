@@ -94,13 +94,13 @@ class App extends Component {
   }
 
   renderHeatmap() {
-  const { correlationMatrix, colorScale, colorBarScale, selectedVariables } = this.state;
+  const { correlationMatrix, colorScale, colorBarScale } = this.state;
   if (!correlationMatrix || !colorScale || !colorBarScale) return null;
 
   // Set up margin and dimensions
   const margin = { top: 30, right: 30, bottom: 30, left: 30 };
-  const width = 450 - margin.left - margin.right;
-  const height = 450 - margin.top - margin.bottom;
+  const width = 300 - margin.left - margin.right;
+  const height = 300 - margin.top - margin.bottom;
 
   // Labels of row and columns
   const myGroups = ["tip", "total_bill", "size"];
@@ -302,7 +302,7 @@ renderBarChart() {
 <div style={{ display: 'flex' }}>
   {/* Bar Chart */}
   
-  <div style={{ flex: 1, padding: 10 }}>
+  <div style={{ flex: 1, padding: 10 }} align="center">
   <input type="radio" id="tip" name="option" value="tip" checked={this.state.selectedOption === 'tip'} onChange={() => this.setState({ selectedOption: 'tip' })} />
     <label htmlFor="tip">Tip</label>
     <input type="radio" id="totalBill" name="option" value="total_bill" checked={this.state.selectedOption === 'total_bill'} onChange={() => this.setState({ selectedOption: 'total_bill' })} />
@@ -368,7 +368,7 @@ class Scatterplot extends Component {
     }));
 
     // Set up margin and dimensions
-    const margin = { top: 30, right: 30, bottom: 30, left: 60 };
+    const margin = { top: 30, right: 30, bottom: 60, left: 60 }; // Increased bottom margin for axis labels
     const width = 1000 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
@@ -413,8 +413,9 @@ class Scatterplot extends Component {
               {/* X-axis label */}
               <text
                 x={width / 2}
-                y={margin.bottom + 20}
+                y={margin.bottom - 10} // Adjusted position for axis label
                 textAnchor="middle"
+                fill="black"
               >
                 {variable1}
               </text>
@@ -426,9 +427,11 @@ class Scatterplot extends Component {
               {/* Y-axis label */}
               <text
                 x={-height / 2}
-                y={-margin.left + 20}
+                y={-margin.left + 20} // Adjusted position for axis label
                 transform="rotate(-90)"
                 textAnchor="middle"
+                color="black"
+                fill="black"
               >
                 {variable2}
               </text>
